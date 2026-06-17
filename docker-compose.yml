@@ -1,7 +1,7 @@
 services:
-  ros2_dev:
+  galaxear1-sim:
     build: .
-    container_name: robocup_nav
+    container_name: galaxear1-sim
     stdin_open: true
     tty: true
     privileged: true

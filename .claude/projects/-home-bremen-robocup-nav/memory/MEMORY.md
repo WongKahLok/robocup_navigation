@@ -1,2 +1,0 @@
-- [User Profile](user_profile.md) — RoboCup nav developer, limited compute, ROS2 Humble on WSL2
-- [Project Setup](project_setup.md) — Docker environment with Gazebo, Nav2, SLAM Toolbox, Foxglove

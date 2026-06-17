@@ -1,1 +1,0 @@
-/ros2_ws/build/galaxea_simulation/ament_cmake_environment_hooks/local_setup.zsh

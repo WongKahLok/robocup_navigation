@@ -1,0 +1,10 @@
+# Ignore VS Code local settings and Intellisense DBs
+.vscode/
+*.vc.db
+*.vc.db-shm
+*.vc.db-wal
+
+# Ignore ROS build artifacts
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/

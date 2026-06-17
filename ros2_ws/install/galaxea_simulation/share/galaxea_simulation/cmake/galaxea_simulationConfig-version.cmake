@@ -1,1 +1,0 @@
-/ros2_ws/build/galaxea_simulation/ament_cmake_core/galaxea_simulationConfig-version.cmake
