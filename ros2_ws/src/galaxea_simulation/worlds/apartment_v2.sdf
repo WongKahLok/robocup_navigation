@@ -25,13 +25,13 @@
 
     <model name="ground_plane">
       <static>true</static>
-      <pose>0 -3.75 0 0 0 0</pose>
+      <pose>4 0 0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><plane><normal>0 0 1</normal><size>16 8</size></plane></geometry>
+          <geometry><plane><normal>0 0 1</normal><size>8 15</size></plane></geometry>
         </collision>
         <visual name="visual">
-          <geometry><plane><normal>0 0 1</normal><size>16 8</size></plane></geometry>
+          <geometry><plane><normal>0 0 1</normal><size>8 15</size></plane></geometry>
           <material>
             <ambient>0.75 0.75 0.72 1</ambient>
             <diffuse>0.75 0.75 0.72 1</diffuse>
@@ -40,21 +40,37 @@
       </link>
     </model>
 
-    <!-- Outer walls: south half only, sealed off where the rest of the apartment used to be -->
+    <!-- Outer walls (cut down to the width/length of the two right-side rooms) -->
+    <model name="wall_north"><static>true</static><pose>4 7.5 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>8 0.15 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>8 0.15 2</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link></model>
     <model name="wall_south"><static>true</static><pose>4 -7.5 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>8 0.15 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>8 0.15 2</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link></model>
-    <model name="wall_east"><static>true</static><pose>8 -3.75 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.15 7.5 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.15 7.5 2</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link></model>
-    <model name="wall_center"><static>true</static><pose>4 0 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>8 0.15 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>8 0.15 2</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link></model>
+    <model name="wall_east"><static>true</static><pose>8 0 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.15 15 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.15 15 2</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link></model>
 
-    <!-- Inner wall dividing the two retained rooms: one 915mm door + one 400mm gap -->
+    <!-- Inner walls: each has one 915mm door + one 400mm gap -->
+
+    <model name="inner_wall_north_center"><static>true</static><pose>0 1.5703125 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.12 3.140625 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.12 3.140625 2</size></box></geometry></visual></link></model>
+    <model name="inner_wall_north_outer_bottom"><static>true</static><pose>0 4.526875 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.12 0.9425 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.12 0.9425 2</size></box></geometry></visual></link></model>
+    <model name="inner_wall_north_outer_top"><static>true</static><pose>0 6.4490625 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.12 2.101875 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.12 2.101875 2</size></box></geometry></visual></link></model>
+
     <model name="inner_wall_south_center"><static>true</static><pose>0 -1.5890625 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.12 3.178125 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.12 3.178125 2</size></box></geometry></visual></link></model>
     <model name="inner_wall_south_outer_top"><static>true</static><pose>0 -4.620625 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.12 1.055 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.12 1.055 2</size></box></geometry></visual></link></model>
     <model name="inner_wall_south_outer_bottom"><static>true</static><pose>0 -6.5365625 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.12 1.976875 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.12 1.976875 2</size></box></geometry></visual></link></model>
 
+    <model name="inner_wall_east_center"><static>true</static><pose>1.7265625 0 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>3.453125 0.12 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>3.453125 0.12 2</size></box></geometry></visual></link></model>
+    <model name="inner_wall_east_outer_left"><static>true</static><pose>4.976875 0 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>1.2175 0.12 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>1.2175 0.12 2</size></box></geometry></visual></link></model>
+    <model name="inner_wall_east_outer_right"><static>true</static><pose>6.9678125 0 1 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>1.964375 0.12 2</size></box></geometry></collision><visual name="visual"><geometry><box><size>1.964375 0.12 2</size></box></geometry></visual></link></model>
+
     <!-- Furniture simplified as boxes -->
+    <model name="dining_table"><static>true</static><pose>4.5 4.8 0.4 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>1.5 0.9 0.8</size></box></geometry></collision><visual name="visual"><geometry><box><size>1.5 0.9 0.8</size></box></geometry></visual></link></model>
+    <model name="chair_1"><static>true</static><pose>3.4 4.8 0.35 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.5 0.5 0.7</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.5 0.5 0.7</size></box></geometry></visual></link></model>
+    <model name="chair_2"><static>true</static><pose>5.6 4.8 0.35 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.5 0.5 0.7</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.5 0.5 0.7</size></box></geometry></visual></link></model>
+
+    <model name="pantry"><static>true</static><pose>6.9 2.0 1.0 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.8 1.2 2.0</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.8 1.2 2.0</size></box></geometry><material><ambient>0.6 0.4 0.2 1</ambient><diffuse>0.6 0.4 0.2 1</diffuse></material></visual></link></model>
+    <model name="dishwasher"><static>true</static><pose>5.4 2.0 0.45 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.8 0.7 0.9</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.8 0.7 0.9</size></box></geometry><material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material></visual></link></model>
+
     <model name="bookshelf"><static>true</static><pose>6.8 -2.8 1.0 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.7 1.4 2.0</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.7 1.4 2.0</size></box></geometry><material><ambient>0.45 0.25 0.1 1</ambient><diffuse>0.45 0.25 0.1 1</diffuse></material></visual></link></model>
     <model name="washing_machine"><static>true</static><pose>5.2 -5.5 0.5 0 0 0</pose><link name="link"><collision name="collision"><geometry><box><size>0.8 0.8 1.0</size></box></geometry></collision><visual name="visual"><geometry><box><size>0.8 0.8 1.0</size></box></geometry><material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual></link></model>
     <model name="trash_bin"><static>true</static><pose>6.8 -5.5 0.35 0 0 0</pose><link name="link"><collision name="collision"><geometry><cylinder><radius>0.25</radius><length>0.7</length></cylinder></geometry></collision><visual name="visual"><geometry><cylinder><radius>0.25</radius><length>0.7</length></cylinder></geometry><material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material></visual></link></model>
     <model name="laundry_basket"><static>true</static><pose>6.1 -4.3 0.3 0 0 0</pose><link name="link"><collision name="collision"><geometry><cylinder><radius>0.22</radius><length>0.6</length></cylinder></geometry></collision><visual name="visual"><geometry><cylinder><radius>0.22</radius><length>0.6</length></cylinder></geometry><material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual></link></model>
-
+    
   </world>
 </sdf>
