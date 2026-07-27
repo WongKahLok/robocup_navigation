@@ -2,8 +2,10 @@ import os
 import xacro
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import (
+    DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
 
 def generate_launch_description():
@@ -23,12 +25,29 @@ def generate_launch_description():
         value=gz_resource_path,
     )
 
+    declare_headless = DeclareLaunchArgument(
+        'headless', default_value='false',
+        description='Run gz server-only with offscreen EGL rendering (no GUI)')
+
+    headless_flags = PythonExpression([
+        "'-s --headless-rendering ' if '", LaunchConfiguration('headless'),
+        "'.lower() in ('true', '1') else ''",
+    ])
+
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')
         ]),
-        launch_arguments={'gz_args': ['-r ', world_file]}.items(),
+        launch_arguments={'gz_args': ['-r ', headless_flags, world_file]}.items(),
     )
+
+    spawn_x = LaunchConfiguration('spawn_x')
+    spawn_y = LaunchConfiguration('spawn_y')
+
+    declare_spawn_x = DeclareLaunchArgument(
+        'spawn_x', default_value='3.0', description='Robot spawn x in world frame [m]')
+    declare_spawn_y = DeclareLaunchArgument(
+        'spawn_y', default_value='-3.0', description='Robot spawn y in world frame [m]')
 
     spawn = Node(
         package='ros_gz_sim',
@@ -36,8 +55,8 @@ def generate_launch_description():
         arguments=[
             '-name', 'r1',
             '-topic', 'robot_description',
-            '-x', '7',
-            '-y', '-7',
+            '-x', spawn_x,
+            '-y', spawn_y,
             '-z', '0.5',
         ],
         output='screen',
@@ -119,6 +138,9 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        declare_headless,
+        declare_spawn_x,
+        declare_spawn_y,
         set_gz_resource,
         gazebo,
         robot_state_publisher,
